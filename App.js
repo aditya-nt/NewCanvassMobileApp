@@ -1,21 +1,90 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// import { StatusBar } from 'expo-status-bar';
+// import React from 'react';
+// // import { StyleSheet, Text, View } from 'react-native';
+// import { Pressable, View, Text } from 'react-native';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createDrawerNavigator } from '@react-navigation/drawer';
+
+// function Home({ navigation }) {
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Text>Welcome to our Home Screen</Text>
+//       <Text>Checkout screens from the tab below</Text>
+//       <Pressable
+//         onPress={() => navigation.openDrawer()}
+//         style={{ padding: 10, marginBottom: 10, marginTop: 10 }}
+//       >
+//         <Text>Open Drawer</Text>
+//       </Pressable>
+//     </View>
+//   );
+// }
+
+// function Conference({ navigation }) {
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Text style={{ fontSize: 20 }}>Conference Details</Text>
+//       <Pressable
+//         onPress={() => navigation.navigate('Story')}
+//         style={{ padding: 10, marginBottom: 10, marginTop: 10 }}
+//       >
+//         <Text>Go to Story</Text>
+//       </Pressable>
+//       <Pressable
+//         onPress={() => navigation.openDrawer()}
+//         style={{ padding: 10, marginBottom: 10, marginTop: 10 }}
+//       >
+//         <Text>Open Drawer</Text>
+//       </Pressable>
+//     </View>
+//   );
+// }
+
+// function Story({ navigation }) {
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Text style={{ fontSize: 20 }}>Our Story</Text>
+//       <Pressable
+//         onPress={() => navigation.navigate('Conference')}
+//         style={{ padding: 10, marginBottom: 10, marginTop: 10 }}
+//       >
+//         <Text>Go to Conference</Text>
+//       </Pressable>
+//     </View>
+//   );
+// }
+
+// const Drawer = createDrawerNavigator();
+
+// function App() {
+//   return (
+//     <NavigationContainer>
+//       <Drawer.Navigator>
+//         <Drawer.Screen name="Home" component={Home} />
+//         <Drawer.Screen name="Conference" component={Conference} />
+//         <Drawer.Screen name="Story" component={Story} />
+//       </Drawer.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+// export default App;
+
+
+import * as React from 'react';
+import { Provider } from "react-redux";
+import { store } from './store';
+
+
+import Routes from './navigation';
+
+
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store} >
+      <Routes />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
