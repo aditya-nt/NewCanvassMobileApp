@@ -5,6 +5,8 @@ import HTML from "react-native-render-html";
 import { useSelector } from "react-redux";
 import AppBar from "../../AppBar";
 import logo from '../../../assets/adaptive-icon.png';
+import SwiperPost from "../SwiperPost";
+import LottieView from 'lottie-react-native';
 
 
 
@@ -14,12 +16,12 @@ export default function NewsSimplifiedArticle({ navigation }) {
     const [loading, setloading] = useState(true)
 
     const selectedPost = useSelector(state => state.simplified.selectedPost)
-    // const selectedPost = 0
+    // selectedPost = 0
 
 
     const post = useSelector(state => state.simplified.tasksimplified[selectedPost])
 
-
+    console.log(selectedPost)
 
     useEffect(() => {
 
@@ -32,49 +34,80 @@ export default function NewsSimplifiedArticle({ navigation }) {
     }, [selectedPost])
 
 
-    const title = post.title
+    // const title = post.title
+    // console.log("4444", post.title)
 
-    return (<>
-        {/* <AppBar title="NewsSimplified" subtitle={title} back="true" navigation={navigation} /> */}
-        <ScrollView style={{ flex: 1, backgroundColor: '#111111', padding: '5%' }}>
+    return (
+        <>{
+
+            !post &&
+            <View style={{ flex: 1, backgroundColor: '#000' }}>
+                <LottieView source={require('../../../assets/7899-loading.json')} autoPlay loop />
+            </View>
+
+        }
 
             {
-                !loading && <Card style={{ paddingHorizontal: 0, backgroundColor: 'black' }}>
+                post &&
 
-                    <Title style={{ color: '#fff', fontSize: 22 }}>{post.title}</Title>
-
-                </Card>}
-
-            {
+                <ScrollView style={{ flex: 1, backgroundColor: '#111111', padding: '5%' }}>
 
 
 
-                (loading) ?
-                    <Card style={styles.item}>
-                        <Card.Cover source={logo} />
-                    </Card>
 
-                    :
+                    {
+                        !post && <Card style={{ paddingHorizontal: 0, backgroundColor: 'black' }}>
+
+                            <Title style={{ color: '#fff', fontSize: 22 }}>{post.title}</Title>
+
+                        </Card>}
+
+                    {
 
 
 
-                    <Card style={styles.item}>
 
-                        <Card.Cover source={{ uri: `${post.imageUrl}` }} />
-                    </Card>
 
+
+
+                        <Card style={styles.item}>
+
+                            <Card.Cover source={{ uri: `${post.imageUrl}` }} />
+                        </Card>
+
+                    }
+
+
+                    <HTML source={{ html: `${post.desc}` }} contentWidth={contentWidth} />
+
+                    <Text >ddddd</Text>
+                    <Text >ddddd</Text>
+
+                    <View
+                        style={{
+                            borderBottomColor: '#fff',
+                            borderBottomWidth: 1,
+                            margin: 10
+                        }}
+                    />
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#111111', height: 300 }}>
+                        <Text style={{ color: 'white', fontSize: 18 }}>Related Posts</Text>
+
+                        <Text >ddddd</Text>
+
+                        <SwiperPost />
+
+                    </View>
+
+                    <Text >ddddd</Text>
+                    <Text >ddddd</Text>
+
+                </ScrollView>
             }
+        </>
 
 
-            <HTML source={{ html: `${post.desc}` }} contentWidth={contentWidth} />
 
-            <Text >ddddd</Text>
-            <Text >ddddd</Text>
-            <Text >ddddd</Text>
-            <Text >ddddd</Text>
-            <Text >ddddd</Text>
-        </ScrollView>
-    </>
     );
 }
 

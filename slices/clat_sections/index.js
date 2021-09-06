@@ -23,7 +23,7 @@ export const fetchCLATSectionsTask = createAsyncThunk("clat_sections/fetchPosts"
                     //     index: count,
                     // });
 
-                    console.log("ssssss", doc.val())
+                    console.log("sectionalData", doc.val())
 
                 });
             } else {
@@ -46,7 +46,7 @@ export const clat_sections = createSlice({
         task: null,
         loading: true,
         err: null,
-        selectedPost: 0
+        selectedPost: "Section00"
     },
     reducers: {
         setSelectedPost: (state, action) => {

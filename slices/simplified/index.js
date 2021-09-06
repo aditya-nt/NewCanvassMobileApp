@@ -40,6 +40,8 @@ export const fetchSimplifiedTask = createAsyncThunk("decoded/fetchPosts", async 
     return data;
 });
 
+
+
 export const simplified = createSlice({
     name: "simplified",
     initialState: {

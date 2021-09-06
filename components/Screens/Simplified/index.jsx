@@ -10,10 +10,6 @@ import { useIsFocused } from '@react-navigation/native';
 
 import LottieView from 'lottie-react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-
 
 export default Simplified = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -47,9 +43,6 @@ export default Simplified = ({ navigation }) => {
     );
 
 
-    // useEffect(() => {
-
-    // }, [])
 
 
     useEffect(() => {

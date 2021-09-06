@@ -3,37 +3,38 @@ import React, { useEffect, useState, useRef } from 'react';
 
 //import all the components we are going to use
 import { FlatList, View, Text, SafeAreaView, StyleSheet, Dimensions, Animated, Easing } from 'react-native';
-import { fetchCLATTabsTask } from '../../../slices/clat_tabs';
+import { clat_tabs, fetchCLATTabsTask } from '../../../slices/clat_tabs';
 import { useDispatch, useSelector } from 'react-redux';
+import { clat_sections, fetchCLATSectionsTask } from '../../../slices/clat_sections';
 
-const dummyArray = [
-    { id: '1', value: 'A' },
-    { id: '2', value: 'B' },
-    { id: '3', value: 'C' },
-    { id: '4', value: 'D' },
-    { id: '5', value: 'E' },
-    { id: '6', value: 'F' },
-    { id: '7', value: 'G' },
-    { id: '8', value: 'H' },
-    { id: '9', value: 'I' },
-    { id: '10', value: 'J' },
-    { id: '11', value: 'K' },
-    { id: '12', value: 'L' },
-    { id: '13', value: 'M' },
-    { id: '14', value: 'N' },
-    { id: '15', value: 'O' },
-    { id: '16', value: 'P' },
-    { id: '17', value: 'Q' },
-    { id: '18', value: 'R' },
-    { id: '19', value: 'S' },
-    { id: '20', value: 'T' },
-    { id: '21', value: 'U' },
-    { id: '22', value: 'V' },
-    { id: '23', value: 'W' },
-    { id: '24', value: 'X' },
-    { id: '25', value: 'Y' },
-    { id: '26', value: 'Z' },
-];
+// const dummyArray = [
+//     { id: '1', value: 'A' },
+//     { id: '2', value: 'B' },
+//     { id: '3', value: 'C' },
+//     { id: '4', value: 'D' },
+//     { id: '5', value: 'E' },
+//     { id: '6', value: 'F' },
+//     { id: '7', value: 'G' }, ``
+//     { id: '8', value: 'H' },
+//     { id: '9', value: 'I' },
+//     { id: '10', value: 'J' },
+//     { id: '11', value: 'K' },
+//     { id: '12', value: 'L' },
+//     { id: '13', value: 'M' },
+//     { id: '14', value: 'N' },
+//     { id: '15', value: 'O' },
+//     { id: '16', value: 'P' },
+//     { id: '17', value: 'Q' },
+//     { id: '18', value: 'R' },
+//     { id: '19', value: 'S' },
+//     { id: '20', value: 'T' },
+//     { id: '21', value: 'U' },
+//     { id: '22', value: 'V' },
+//     { id: '23', value: 'W' },
+//     { id: '24', value: 'X' },
+//     { id: '25', value: 'Y' },
+//     { id: '26', value: 'Z' },
+// ];
 
 const TabScreen = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -41,11 +42,27 @@ const TabScreen = ({ navigation }) => {
 
     const tabs = useSelector(state => state.clat_tabs.task)
 
+    let actionsTabs = bindActionCreators(clat_tabs.actions, dispatch)
+    let actionsSections = bindActionCreators(clat_sections.actions, dispatch)
+
 
     const translateX = useRef(new Animated.Value(Dimensions.get("window").height)).current
     useEffect(() => {
-        Animated.timing(translateX, { toValue: 0, duration: 2000 }).start();
+        Animated.timing(translateX, { toValue: 0, duration: 2000, useNativeDriver: false }).start();
+
     }, [tabs])
+
+
+
+
+
+    const handleClickPost = (index) => {
+        // actionsTabs.setSelectedPost(index)
+        // actionsSections.setSelectedPost(index)
+        // navigation.navigate('Sections')
+        // console.log(index)
+    }
+
     const ItemView = ({ item }) => {
 
         return (
@@ -69,12 +86,16 @@ const TabScreen = ({ navigation }) => {
 
     const getItem = (item) => {
         //Function for click on an item
-        alert('Tab : ' + item.TabName + ' Sec : ' + item.Section);
+        actionsTabs.setSelectedPost(item.TabName)
+        actionsSections.setSelectedPost(item.Section)
+        navigation.navigate('Sections')
+        // alert('Tab : ' + item.TabName + ' Sec : ' + item.Section);
     };
 
 
     useEffect(() => {
         dispatch(fetchCLATTabsTask({ limit: 1 }));
+        dispatch(fetchCLATSectionsTask({ limit: 1 }));
         return () => {
 
         }
@@ -83,7 +104,7 @@ const TabScreen = ({ navigation }) => {
 
     return (
         <>
-            <AppBar title="Tabs" subtitle="NewsCanvass App" navigation={navigation} />
+            {/* <AppBar title="Tabs" subtitle="NewsCanvass App" navigation={navigation} /> */}
 
             <View style={styles.container}>
                 <FlatList

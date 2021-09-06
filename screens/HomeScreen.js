@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { IconButton } from '../Oldcomponents';
 import { Firebase } from '../config/firebase';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
+import SwiperPost from '../components/Screens/SwiperPost';
 
 const auth = Firebase.auth();
 
@@ -29,6 +30,9 @@ export default function HomeScreen() {
           onPress={handleSignOut}
         />
       </View>
+
+      <SwiperPost />
+
       <Text style={styles.text}>Your UID is: {user.uid} </Text>
     </View>
   );

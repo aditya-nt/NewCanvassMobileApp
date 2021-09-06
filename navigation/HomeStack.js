@@ -10,11 +10,16 @@ import CustomSidebarMenu from '../components/CustomSIdebarMenu';
 import Simplified from '../components/Screens/Simplified';
 import { StyleSheet, View, Button, Text } from 'react-native';
 import NewsSimplifiedArticle from '../components/Screens/NewsSimplifiedArticle';
-
+import Snippets from '../components/Screens/Snippets';
+import Swiper from "../components/Screens/SwiperPost";
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-
+import SwiperPost from "../components/Screens/SwiperPost";
+import { SimplifiedStack } from './SimplifiedStack';
+import TabScreen from '../components/Screens/TabScreen';
+import { ClatStack } from './ClatStack';
+import { SnippetStack } from './SnippetStack';
 function SettingsScreen({ navigation }) {
   // const { user } = route.params;
   return (
@@ -29,44 +34,6 @@ function SettingsScreen({ navigation }) {
   );
 }
 
-
-
-function SimplifiedRoot() {
-  return (
-    <Stack.Navigator>
-      {/* <Stack.Screen name="Settings" component={HomeScreen} /> */}
-
-
-      <Stack.Screen name="Simplified" component={Simplified}
-        options={{
-          headerShown: false,
-          title: 'NewsSimplified',
-          headerStyle: {
-            backgroundColor: '#111111',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            // fontWeight: 'bold',
-          },
-        }}
-      />
-      <Stack.Screen name="Profile"
-        screenOptions={{ headerShown: true }}
-        component={NewsSimplifiedArticle} options={{
-          title: 'NewsSimplified',
-          headerStyle: {
-            backgroundColor: '#111111',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            color: "#fff",
-          },
-        }} />
-
-
-    </Stack.Navigator>
-  );
-}
 
 
 
@@ -119,7 +86,7 @@ function NewsApp() {
         < CustomSidebarMenu {...props} />
       }
     >
-      <Drawer.Screen name="Home" component={HomeScreen}
+      <Drawer.Screen name="Home" component={SnippetStack}
         options={{
           headerShown: true,
 
@@ -133,7 +100,7 @@ function NewsApp() {
           },
         }}
       />
-      <Drawer.Screen name="NewSimplified" component={SimplifiedRoot}
+      <Drawer.Screen name="NewSimplified" component={SimplifiedStack}
 
         options={{
           headerShown: false,
@@ -163,7 +130,20 @@ function NewsApp() {
           },
         }}
       />
+      <Drawer.Screen name="Clat" component={ClatStack}
+        options={{
+          headerShown: true,
 
+          title: 'CLAT Section',
+          headerStyle: {
+            backgroundColor: '#000',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            color: "#fff",
+          },
+        }}
+      />
     </Drawer.Navigator>
   );
 }
@@ -171,15 +151,9 @@ function NewsApp() {
 
 export default function HomeStack() {
   return (
-    // <Stack.Navigator headerMode='none'>
-    //   <Stack.Screen name='Home' component={HomeScreen} />
-    // </Stack.Navigator>
+
     <NewsApp />
-    // <SimplifiedRoot />
-    // <DecodedRoot />
-    // <Drawer.Navigator>
-    //   <Drawer.Screen name='Home' component={HomeScreen} />
-    // </Drawer.Navigator>
+
   );
 }
 
