@@ -14,7 +14,7 @@ export function DecodedStack() {
             <Stack.Screen name="Decoded" component={Decoded}
                 options={{
                     headerShown: false,
-                    title: 'NewsDecoded',
+                    title: 'News Decoded',
                     headerStyle: {
                         backgroundColor: '#111111',
                     },

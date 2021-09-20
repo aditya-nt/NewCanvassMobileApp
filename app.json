@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "new-mobile-app2",
-    "slug": "new-mobile-app2",
+    "name": "Newscanvass",
+    "slug": "newscanvass",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,12 +17,14 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.newscanvass.newscanvass",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.newscanvass.newscanvass",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#000000"
       }
     },
     "web": {

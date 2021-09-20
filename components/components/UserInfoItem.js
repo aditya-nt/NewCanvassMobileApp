@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Firebase } from '../../config/firebase';
 import { AuthenticatedUserContext } from '../../navigation/AuthenticatedUserProvider';
+import { useSubsContext } from '../../navigation/SubscriberContext';
 
 // import { IconButton } from '../Oldcomponents';
 // import { Firebase } from '../config/firebase';
@@ -12,8 +13,16 @@ import { AuthenticatedUserContext } from '../../navigation/AuthenticatedUserProv
 
 const auth = Firebase.auth();
 
+
 export default function UserInfoItem() {
     const { user } = useContext(AuthenticatedUserContext);
+
+    const { subscriber, subscribed, planName } = useSubsContext()
+
+    const styles2 = {
+        dot: { width: 15, height: 15, backgroundColor: (subscribed) ? '#90ee90' : 'red', alignSelf: 'center', borderRadius: 8 }
+    }
+    // console.log("object", user)
     const handleSignOut = async () => {
         try {
             await auth.signOut();
@@ -36,10 +45,18 @@ export default function UserInfoItem() {
         //     <Text style={styles.text}>Your UID is: {user.uid} </Text>
         // </View>
 
-        <DrawerItem
-            label={user.email}
-        // onPress={() => Linking.openURL('https://aboutreact.com/')}
-        />
+        // <DrawerItem
+        //     label={user.email} marginBottom={10}
+        // // label={user.email} activeBackgroundColor='#ff0000' activeTintColor='#2196f3' inactiveTintColor='rgba(0, 0, 0, .87)' inactiveBackgroundColor='transparent' style={{ backgroundColor: '#000000' }} labelStyle={{ color: '#ffffff' }}
+        // // onPress={() => Linking.openURL('https://aboutreact.com/')}
+        // >
+
+
+        // </DrawerItem>
+        <View style={styles.row}>
+            <View style={styles2.dot}></View><Text style={styles.text}>  Hi, {user.displayName} </Text>
+        </View>
+
     );
 }
 
@@ -52,18 +69,30 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 24
+        marginBottom: 24,
+        backgroundColor: "#000",
+        // height: 40
+        paddingBottom: 10
     },
     title: {
         fontSize: 24,
         fontWeight: '600',
-        color: '#fff'
+        color: '#000'
     },
     text: {
+        alignSelf: 'center',
+
         fontSize: 16,
         fontWeight: 'normal',
-        color: '#fff'
+        color: '#da9621',
+        backgroundColor: "#000",
+        fontStyle: 'italic'
+    },
+    backrow: {
+
+        backgroundColor: "#000",
+        height: 40
     }
 });

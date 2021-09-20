@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { rdb } from "../../config/firebase";
 
 
-export const fetchSimplifiedTask = createAsyncThunk("decoded/fetchPosts", async () => {
+export const fetchSimplifiedTask = createAsyncThunk("simplified/fetchPosts", async () => {
     const promise = rdb
         .ref()
         .child("Posts")
@@ -23,6 +23,7 @@ export const fetchSimplifiedTask = createAsyncThunk("decoded/fetchPosts", async 
                         imageUrl: doc.val().imageUrl,
                         desc: doc.val().desc,
                         index: count,
+                        rawdate: doc.val().rawdate,
 
                     });
                 });
@@ -37,6 +38,9 @@ export const fetchSimplifiedTask = createAsyncThunk("decoded/fetchPosts", async 
         });
 
     const data = await promise;
+    data.sort((a, b) => {
+        return a.rawdate - b.rawdate
+    })
     return data;
 });
 
@@ -59,6 +63,13 @@ export const simplified = createSlice({
     extraReducers: {
         [fetchSimplifiedTask.fulfilled]: (state, action) => {
             state.tasksimplified = action.payload;
+
+            // console.log("99999999-------", action.payload.title)
+            console.log("<----------------------------- >")
+
+            action.payload.forEach(item => {
+                console.log("ddddd   --- >", item.id)
+            })
             state.loading = false;
         },
         [fetchSimplifiedTask.pending]: (state) => {

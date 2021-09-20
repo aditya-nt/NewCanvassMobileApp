@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import { ScrollView, useWindowDimensions, View, StyleSheet, Image } from "react-native";
+import { ScrollView, useWindowDimensions, View, StyleSheet, Image, Text } from "react-native";
 import { Button, Card, Title, Paragraph } from 'react-native-paper';
 import HTML from "react-native-render-html";
 import { useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import AppBar from "../../AppBar";
 import logo from '../../../assets/adaptive-icon.png';
 import YoutubePlayer from "react-native-youtube-iframe";
 import YouTubeTest from "../../Video";
+import SwiperPostND from "../SwiperPostND";
 
 
 export default function NewsDecodedArticle({ navigation }) {
@@ -54,6 +55,34 @@ export default function NewsDecodedArticle({ navigation }) {
                 {/* <Paragraph>Read More...</Paragraph> */}
             </Card.Content>
 
+
+
+
+            <Text >     </Text>
+            <Text >     </Text>
+            <Text >     </Text>
+            <Text >     </Text>
+            <Text >      </Text>
+            <Text >     </Text>
+            <Text >     </Text>
+
+            <View
+                style={{
+                    borderBottomColor: '#fff',
+                    borderBottomWidth: 1,
+                    margin: 10
+                }}
+            />
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#111111', height: 300 }}>
+                <Text style={{ color: 'white', fontSize: 18 }}>Related Posts</Text>
+
+                <Text >    </Text>
+                <Text >    </Text>
+
+                <SwiperPostND />
+
+
+            </View>
 
 
             {/* <HTML source={{ html: `${post.desc}` }} contentWidth={contentWidth} /> */}

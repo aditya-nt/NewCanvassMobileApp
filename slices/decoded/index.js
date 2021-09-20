@@ -48,6 +48,9 @@ export const fetchDecodedTask = createAsyncThunk("decoded/fetchPosts", async () 
         });
 
     const data = await promise;
+    data.sort((a, b) => {
+        return b.rawdate - a.rawdate
+    })
     return data;
 });
 
@@ -67,6 +70,8 @@ export const decoded = createSlice({
     extraReducers: {
         [fetchDecodedTask.fulfilled]: (state, action) => {
             state.taskdecoded = action.payload;
+            // console.log("000000000  ------- ", action.payload)
+
             state.loading = false;
         },
         [fetchDecodedTask.pending]: (state) => {

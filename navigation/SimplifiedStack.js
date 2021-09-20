@@ -18,7 +18,7 @@ export function SimplifiedStack() {
             <Stack.Screen name="Simplified" component={Simplified}
                 options={{
                     headerShown: false,
-                    title: 'NewsSimplified',
+                    title: 'News Simplified',
                     headerStyle: {
                         backgroundColor: '#111111',
                     },

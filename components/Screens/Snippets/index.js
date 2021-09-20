@@ -12,7 +12,7 @@ import LottieView from 'lottie-react-native';
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
 
-import { fetchSimplifiedTask, setSelectedPost, simplified } from "../../../slices";
+import { fetchDecodedTask, fetchSimplifiedTask, setSelectedPost, simplified } from "../../../slices";
 import AppBar from '../../AppBar';
 
 class Exemple extends Component {
@@ -36,7 +36,7 @@ class Exemple extends Component {
                 <Image style={styles.sideMenuProfileIcon}
                     source={{ uri: `${card.imageUrl}` }}
                 />
-                <Text style={styles.text}>{card.title} </Text>
+                <Text numberOfLines={2} style={styles.text}>{card.title} </Text>
 
             </View>
 
@@ -76,10 +76,12 @@ class Exemple extends Component {
         // console.log("ffff", this.props.tasksimplified)
         const data = this.props.tasksimplified
 
+
         // console.log(data)
-        return (
+        return (<>
+            <AppBar title="Snippets" subtitle="NewsCanvass App" navigation={this.props.navigation} />
+
             <View style={{ flex: 1, backgroundColor: '#000' }}>
-                {/* <AppBar title="Snippets" subtitle="NewsCanvass App" navigation={this.props.navigation} /> */}
 
                 {/* <View > */}
 
@@ -193,8 +195,15 @@ class Exemple extends Component {
                     >
                         {/* <Button onPress={() => this.swiper.swipeBack()} title='Swipe Back' /> */}
                     </Swiper>}
+
+                <Text>   </Text>
+                <Text>   </Text>
+                <Text>   </Text>
+                <Text>   </Text>
+                <Text>   </Text>
                 {/* </View> */}
             </View>
+        </>
         )
     }
 }
@@ -203,9 +212,11 @@ const mapStateToProps = (state) => ({
     tasksimplified: state.simplified.tasksimplified
 });
 
+
 const mapDispatchToProps = (dispatch) => {
     return {
         fetch: () => dispatch(fetchSimplifiedTask({ limit: 1 })),
+
         setPost: (post) => dispatch(simplified.actions.setSelectedPost(post))
     }
 };
@@ -216,6 +227,7 @@ const styles = StyleSheet.create({
     container: {
         // flex: 1,
         // backgroundColor: '#111111'
+        marginTop: 0
     },
     sideMenuProfileIcon: {
         marginVertical: 10,

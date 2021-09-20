@@ -1,97 +1,113 @@
+import { bindActionCreators } from "@reduxjs/toolkit";
 import React, { Component, useEffect, useState } from "react";
 import { ScrollView, useWindowDimensions, View, StyleSheet, Image, Text } from "react-native";
 import { Button, Card, Title, Paragraph } from 'react-native-paper';
-import HTML from "react-native-render-html";
-import { useSelector } from "react-redux";
-import AppBar from "../../AppBar";
-import logo from '../../../assets/adaptive-icon.png';
-import SwiperPost from "../SwiperPost";
+// import HTML from "react-native-render-html";
+import { useDispatch, useSelector } from "react-redux";
+import { clat_doc, clat_sections } from "../../../slices";
 
+import Card_A from "../../cards/Card_A";
+// import Card_Back from "../../cards/Card_Back";
+// import AppBar from "../../AppBar";
+// import logo from '../../../assets/adaptive-icon.png';
+// import SwiperPost from "../SwiperPost";
 
 
 export default function SectionScreen({ navigation }) {
+
+    const dispatch = useDispatch()
+    let actionsSections = bindActionCreators(clat_sections.actions, dispatch)
+    let actionsLinks = bindActionCreators(clat_doc.actions, dispatch)
+
+
     const contentWidth = useWindowDimensions().width;
 
     const [loading, setloading] = useState(true)
 
-    const selectedPost = useSelector(state => state.clat_sections.selectedPost)
+    const selectedPostArr = useSelector(state => state.clat_sections.selectedPost)
     // const selectedPost = 0
+    // console.log("3333", selectedPost.length)
+    // console.log("ssss", selectedPostArr[selectedPostArr.length - 1])
+
+    const len = selectedPostArr.length - 1
+    const cc = len === 0
+
+    const selectedPost = selectedPostArr[selectedPostArr.length - 1]
+    const posts = useSelector(state => state.clat_sections.task)
+    // console.log(posts)
+    // console.log("yyyy", len)
+
+    const post = posts.filter(item => item.id === selectedPost)
+    // console.log("3333", post[0].data)
+
+    const cards = post[0].data
+
+    // console.log("4444", cards.length)
+
+    // useEffect(() => {
+
+    //     setloading(true)
+    //     setTimeout(() => {
+    //         setloading(false)
+    //     }, 500);
 
 
-    const post = useSelector(state => state.clat_sections.task[selectedPost])
+    // }, [selectedPost])
 
 
+    // const title = post.title
 
-    useEffect(() => {
+    const handleClick = (sectionName) => {
+        actionsSections.setSelectedPost(sectionName)
+        // console.log("object", sectionName)
+    }
 
-        setloading(true)
-        setTimeout(() => {
-            setloading(false)
-        }, 500);
+    const handleLink = (Link) => {
 
+        actionsLinks.setSelectedLink(Link)
 
-    }, [selectedPost])
+        navigation.navigate('Links')
+    }
 
+    const handleBack = (sectionName) => {
+        actionsSections.popSelected()
+        // console.log("object", sectionName)
 
-    const title = post.title
+    }
 
     return (<>
-        {/* <AppBar title="NewsSimplified" subtitle={title} back="true" navigation={navigation} /> */}
+        {/* <AppBar title="CLAT Section" back="true" navigation={navigation} /> */}
         <ScrollView style={{ flex: 1, backgroundColor: '#111111', padding: '5%' }}>
 
-            {/* {
-                !loading && <Card style={{ paddingHorizontal: 0, backgroundColor: 'black' }}>
-
-                    <Title style={{ color: '#fff', fontSize: 22 }}>{post.title}</Title>
-
-                </Card>}
-
             {
+                cards.map((card, index) => {
+                    return (
+
+                        // <Text key={index} style={styles.blankText}>sss</Text>
+                        <Card_A key={index} card={card} onPress={handleClick} handleLink={handleLink}></Card_A>
+                        // <View style={styles.card}>
+
+                        //     <Text style={styles.text}>bbbbb</Text>
+
+                        // </View>
+                    )
 
 
 
-                (loading) ?
-                    <Card style={styles.item}>
-                        <Card.Cover source={logo} />
-                    </Card>
 
-                    :
-
-
-
-                    <Card style={styles.item}>
-
-                        <Card.Cover source={{ uri: `${post.imageUrl}` }} />
-                    </Card>
-
+                })
             }
-
-
-            <HTML source={{ html: `${post.desc}` }} contentWidth={contentWidth} />
-
-            <Text >ddddd</Text>
-            <Text >ddddd</Text>
-
-            <View
-                style={{
-                    borderBottomColor: '#fff',
-                    borderBottomWidth: 1,
-                    margin: 10
-                }}
-            />
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#111111', height: 300 }}>
-                <Text style={{ color: 'white', fontSize: 18 }}>Related Posts</Text>
-
-                <Text >ddddd</Text>
-
-                <SwiperPost />
-
-            </View> */}
-
-            <Text >ddddd</Text>
-            <Text >ddddd</Text>
+            {/* <Text style={styles.whiteText}>ddddfff</Text> */}
+            <Text>     </Text>
+            <Text>     </Text>
 
         </ScrollView>
+
+        {
+
+            !cc && <Button title="Learn More" style={{ backgroundColor: '#ff9800' }} onPress={handleBack}><Text style={{ color: 'white', height: 50 }} >  Go to previous section</Text></Button>
+
+        }
     </>
     );
 }
@@ -110,10 +126,32 @@ const styles = StyleSheet.create({
     blankText: {
         color: "black"
     },
+    whiteText: {
+        color: "white"
+    },
     paragraph: {
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
         padding: 20
+    },
+    card: {
+        flex: 1,
+        borderRadius: 8,
+        borderWidth: 2,
+        borderColor: '#E8E8E8',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+
+
+    },
+    text: {
+        // fontStyle: 'bold',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        textTransform: 'uppercase',
+        margin: 10,
+        fontSize: 20,
+        backgroundColor: 'transparent'
     },
 });

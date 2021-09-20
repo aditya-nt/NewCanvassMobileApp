@@ -16,14 +16,20 @@ export const fetchCLATSectionsTask = createAsyncThunk("clat_sections/fetchPosts"
             if (snapshot.exists()) {
                 snapshot.forEach((doc) => {
                     count++;
-                    // data.push({
-                    //     id: doc.key,
-                    //     Section: doc.val().Section,
-                    //     TabName: doc.val().TabName,
-                    //     index: count,
-                    // });
+                    data.push({
+                        id: doc.key,
+                        index: count,
+                        data: doc.val()
 
-                    console.log("sectionalData", doc.val())
+                        // CardText: doc.val().CardText,
+                        // CardType: doc.val().CardType,
+                        // RedirectTo: doc.val().RedirectTo,
+                        // RedirectType: doc.val().RedirectType,
+                        // Width: doc.val().Width,
+
+                    });
+
+                    // console.log("sectionalData", doc.val())
 
                 });
             } else {
@@ -46,12 +52,23 @@ export const clat_sections = createSlice({
         task: null,
         loading: true,
         err: null,
-        selectedPost: "Section00"
+        selectedPost: [],
+        test: "wwwwww"
     },
     reducers: {
         setSelectedPost: (state, action) => {
-            state.selectedPost = action.payload
+            state.selectedPost.push(action.payload)
+            // console.log("array_add", state.selectedPost)
+        },
+        clearSelected: (state, action) => {
+            state.selectedPost = []
+            // console.log("cleared", state.selectedPost.lastIndex)
+        },
+        popSelected: (state, action) => {
+            state.selectedPost.pop()
+            // console.log("popped", state.selectedPost.lastIndex)
         }
+
 
     },
     extraReducers: {

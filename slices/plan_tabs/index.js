@@ -2,11 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { rdb } from "../../config/firebase";
 
 
-export const fetchCLATTabsTask = createAsyncThunk("clat_tabs/fetchPosts", async () => {
+export const fetchPlanTabsTask = createAsyncThunk("clat_tabs/fetchPosts", async () => {
     const promise = rdb
         .ref()
-        .child("Pages")
-        .child("ClatPage")
+        .child("Subscription")
+        .child("Plans")
         .child("Tabs")
         .get()
         .then((snapshot) => {
@@ -17,10 +17,10 @@ export const fetchCLATTabsTask = createAsyncThunk("clat_tabs/fetchPosts", async 
                 snapshot.forEach((doc) => {
                     count++;
                     data.push({
-                        id: doc.key,
-                        Section: doc.val().Section,
-                        TabName: doc.val().TabName,
-                        index: count,
+                        // id: doc.key,
+                        // Section: doc.val().Section,
+                        // TabName: doc.val().TabName,
+                        // index: count,
                     });
 
                 });
@@ -38,8 +38,8 @@ export const fetchCLATTabsTask = createAsyncThunk("clat_tabs/fetchPosts", async 
     return data;
 });
 
-export const clat_tabs = createSlice({
-    name: "clat_tabs",
+export const plan_tabs = createSlice({
+    name: "plan_tabs",
     initialState: {
         task: null,
         loading: true,
@@ -53,17 +53,16 @@ export const clat_tabs = createSlice({
 
     },
     extraReducers: {
-        [fetchCLATTabsTask.fulfilled]: (state, action) => {
+        [fetchPlanTabsTask.fulfilled]: (state, action) => {
             state.task = action.payload;
             // console.log(action.payload)r
-            // console.log("3333333  ------- ", action.payload)
 
             state.loading = false;
         },
-        [fetchCLATTabsTask.pending]: (state) => {
+        [fetchPlanTabsTask.pending]: (state) => {
             state.loading = true;
         },
-        [fetchCLATTabsTask.rejected]: (state, action) => {
+        [fetchPlanTabsTask.rejected]: (state, action) => {
             state.err = action.error;
             state.loading = false;
         }

@@ -1,3 +1,6 @@
 export * from "./decoded"
 export * from "./simplified"
 export * from "./clat_tabs"
+export * from "./clat_sections"
+export * from "./clat_doc"
+export * from "./plan_tabs"

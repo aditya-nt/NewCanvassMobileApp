@@ -2,27 +2,29 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: 'expo-firebase-auth-example',
-    slug: 'expo-firebase-auth-example',
+    name: 'Newscanvass',
+    slug: 'newscanvass',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/icon.png',
     splash: {
       image: './assets/splash.png',
       resizeMode: 'contain',
-      backgroundColor: '#ffffff'
+      backgroundColor: '#000000'
     },
     updates: {
       fallbackToCacheTimeout: 0
     },
     assetBundlePatterns: ['**/*'],
     ios: {
+      "bundleIdentifier": "com.newscanvass.newscanvass",
       supportsTablet: true
     },
     android: {
-      adaptiveIcon: {
+      "package": "com.newscanvass.newscanvass",
+      "adaptiveIcon": {
         foregroundImage: './assets/adaptive-icon.png',
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#000000'
       }
     },
     web: {

@@ -98,10 +98,9 @@ export default function LoginScreen({ navigation }) {
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.text}>   </Text>
       <Text style={styles.text}>   </Text>
-      <Text style={styles.text}>   </Text>
 
       <Image
-        source={require('../assets/NClogo2.png')}
+        source={require('../assets/NClogo5.jpg')}
         style={styles.logo}
       />
       <Text style={styles.text}>   </Text>
@@ -183,10 +182,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     paddingTop: 50,
-    backgroundColor: "#111111",
+    backgroundColor: "#000",
   }, logo: {
-    height: 100,
-    width: 100,
+    height: 150,
+    width: 150,
     resizeMode: 'cover',
   },
   text: {

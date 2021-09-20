@@ -18,10 +18,9 @@ export default function NewsSimplifiedArticle({ navigation }) {
     const selectedPost = useSelector(state => state.simplified.selectedPost)
     // selectedPost = 0
 
-
     const post = useSelector(state => state.simplified.tasksimplified[selectedPost])
 
-    console.log(selectedPost)
+    // console.log(selectedPost)
 
     useEffect(() => {
 
@@ -56,9 +55,9 @@ export default function NewsSimplifiedArticle({ navigation }) {
 
 
                     {
-                        !post && <Card style={{ paddingHorizontal: 0, backgroundColor: 'black' }}>
+                        post && <Card style={{ paddingHorizontal: 0, backgroundColor: 'black' }}>
 
-                            <Title style={{ color: '#fff', fontSize: 22 }}>{post.title}</Title>
+                            <Title style={{ color: '#fff', fontSize: 22, fontWeight: '900' }}>{post.title}</Title>
 
                         </Card>}
 
@@ -80,8 +79,8 @@ export default function NewsSimplifiedArticle({ navigation }) {
 
                     <HTML source={{ html: `${post.desc}` }} contentWidth={contentWidth} />
 
-                    <Text >ddddd</Text>
-                    <Text >ddddd</Text>
+                    <Text >    </Text>
+                    <Text >    </Text>
 
                     <View
                         style={{
@@ -93,14 +92,14 @@ export default function NewsSimplifiedArticle({ navigation }) {
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#111111', height: 300 }}>
                         <Text style={{ color: 'white', fontSize: 18 }}>Related Posts</Text>
 
-                        <Text >ddddd</Text>
+                        <Text >    </Text>
 
                         <SwiperPost />
 
                     </View>
 
-                    <Text >ddddd</Text>
-                    <Text >ddddd</Text>
+                    <Text >    </Text>
+                    <Text >    </Text>
 
                 </ScrollView>
             }

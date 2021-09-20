@@ -17,8 +17,14 @@ import {
     DrawerItem,
 } from '@react-navigation/drawer';
 import UserInfoItem from './components/UserInfoItem';
+import SocialMedia from './SocialMedia';
+import { Firebase } from '../config/firebase';
+
+
+const auth = Firebase.auth();
 
 const CustomSidebarMenu = (props) => {
+
     const BASE_PATH =
         'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
     const proileImage = 'react_logo.png';
@@ -38,12 +44,38 @@ const CustomSidebarMenu = (props) => {
                 style={styles.sideMenuProfileIcon}
                 source={require('../assets/NClogo5.jpg')}
             />
+
             <UserInfoItem />
-            <DrawerContentScrollView {...props}>
-                <DrawerItemList {...props} />
+
+            <DrawerContentScrollView
+                {...props}
+            // activeBackgroundColor='#ff0000' activeTintColor='#ff9800' inactiveTintColor='#ff9800' inactiveBackgroundColor='transparent' style={{ backgroundColor: '#fff' }} labelStyle={{ color: '#ffffff' }}
+            >
+                <DrawerItemList  {...props}
+
+                />
+
+                {/* {...pro} */}
+                {/* <DrawerItem
+                    label="Contact Us"
+                    onPress={() => Linking.openURL('https://newscanvassapp.web.app/contactus#')}
+                    drawerActiveTintColor="#000"
+
+                /> */}
+
                 <DrawerItem
-                    label="Visit Us"
-                    onPress={() => Linking.openURL('https://aboutreact.com/')}
+                    label="Rate us on Playstore"
+                    onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.newscanvass.newscanvass')}
+                    drawerActiveTintColor="#000"
+
+                />
+
+                <DrawerItem
+                    label="LogOut"
+                    // onPress={() => Linking.openURL('https://aboutreact.com/')}
+                    onPress={() => auth.signOut()}
+                    drawerActiveTintColor="#000"
+
                 />
                 {/* <View style={styles.customItem}>
                     <Text
@@ -58,13 +90,18 @@ const CustomSidebarMenu = (props) => {
                     />
                 </View> */}
             </DrawerContentScrollView>
-            <Text style={{ fontSize: 16, textAlign: 'center', color: 'grey' }}
+            <SocialMedia />
+
+            {/* <Text style={{ fontSize: 16, textAlign: 'center', color: 'grey' }}
                 onPress={() => {
                     Linking.openURL('https://www.newscanvass.com/');
                 }}>
 
                 www.newscanvass.com
-            </Text>
+            </Text> */}
+            {/* <Text> </Text>
+            <Text> </Text>
+            <Text></Text> */}
         </SafeAreaView>
     );
 };
@@ -93,7 +130,8 @@ const styles = StyleSheet.create({
         height: 250,
         backgroundColor: '#111111',
 
-    }
+    },
+
 });
 
 export default CustomSidebarMenu;

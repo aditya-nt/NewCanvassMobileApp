@@ -32,7 +32,7 @@ export function SnippetStack() {
             <Stack.Screen name="Profile"
                 screenOptions={{ headerShown: true }}
                 component={NewsSimplifiedArticle} options={{
-                    headerShown: false,
+                    headerShown: true,
 
                     title: 'NewsSimplified',
                     headerStyle: {

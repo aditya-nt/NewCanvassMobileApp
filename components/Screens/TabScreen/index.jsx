@@ -6,41 +6,18 @@ import { FlatList, View, Text, SafeAreaView, StyleSheet, Dimensions, Animated, E
 import { clat_tabs, fetchCLATTabsTask } from '../../../slices/clat_tabs';
 import { useDispatch, useSelector } from 'react-redux';
 import { clat_sections, fetchCLATSectionsTask } from '../../../slices/clat_sections';
-
-// const dummyArray = [
-//     { id: '1', value: 'A' },
-//     { id: '2', value: 'B' },
-//     { id: '3', value: 'C' },
-//     { id: '4', value: 'D' },
-//     { id: '5', value: 'E' },
-//     { id: '6', value: 'F' },
-//     { id: '7', value: 'G' }, ``
-//     { id: '8', value: 'H' },
-//     { id: '9', value: 'I' },
-//     { id: '10', value: 'J' },
-//     { id: '11', value: 'K' },
-//     { id: '12', value: 'L' },
-//     { id: '13', value: 'M' },
-//     { id: '14', value: 'N' },
-//     { id: '15', value: 'O' },
-//     { id: '16', value: 'P' },
-//     { id: '17', value: 'Q' },
-//     { id: '18', value: 'R' },
-//     { id: '19', value: 'S' },
-//     { id: '20', value: 'T' },
-//     { id: '21', value: 'U' },
-//     { id: '22', value: 'V' },
-//     { id: '23', value: 'W' },
-//     { id: '24', value: 'X' },
-//     { id: '25', value: 'Y' },
-//     { id: '26', value: 'Z' },
-// ];
+import { bindActionCreators } from '@reduxjs/toolkit';
+import { useSubsContext } from '../../../navigation/SubscriberContext';
 
 const TabScreen = ({ navigation }) => {
     const dispatch = useDispatch()
 
-
+    const { assignedTabs } = useSubsContext()
     const tabs = useSelector(state => state.clat_tabs.task)
+
+
+
+    const myTabs = tabs && tabs.filter(tab => assignedTabs.includes(tab.TabName))
 
     let actionsTabs = bindActionCreators(clat_tabs.actions, dispatch)
     let actionsSections = bindActionCreators(clat_sections.actions, dispatch)
@@ -49,7 +26,6 @@ const TabScreen = ({ navigation }) => {
     const translateX = useRef(new Animated.Value(Dimensions.get("window").height)).current
     useEffect(() => {
         Animated.timing(translateX, { toValue: 0, duration: 2000, useNativeDriver: false }).start();
-
     }, [tabs])
 
 
@@ -87,6 +63,7 @@ const TabScreen = ({ navigation }) => {
     const getItem = (item) => {
         //Function for click on an item
         actionsTabs.setSelectedPost(item.TabName)
+        actionsSections.clearSelected()
         actionsSections.setSelectedPost(item.Section)
         navigation.navigate('Sections')
         // alert('Tab : ' + item.TabName + ' Sec : ' + item.Section);
@@ -104,11 +81,16 @@ const TabScreen = ({ navigation }) => {
 
     return (
         <>
-            {/* <AppBar title="Tabs" subtitle="NewsCanvass App" navigation={navigation} /> */}
+            <AppBar title="CLAT Section" subtitle="NewsCanvass App" navigation={navigation} />
 
             <View style={styles.container}>
+
+                {/* {
+                   
+                } */}
+
                 <FlatList
-                    data={tabs}
+                    data={myTabs}
                     //data defined in constructor
                     ItemSeparatorComponent={ItemSeparatorView}
                     //Item Separator View
@@ -129,6 +111,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
         marginTop: 20,
+        // backgroundColor: 'red'
 
     },
     item: {

@@ -3,23 +3,17 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from '../screens/HomeScreen';
-import Decoded from '../components/Screens/Decoded';
-import NewsDecodedArticle from '../components/Screens/NewsDecodedArticle';
 import CustomSidebarMenu from '../components/CustomSIdebarMenu';
-import Simplified from '../components/Screens/Simplified';
-import { StyleSheet, View, Button, Text } from 'react-native';
-import NewsSimplifiedArticle from '../components/Screens/NewsSimplifiedArticle';
-import Snippets from '../components/Screens/Snippets';
-import Swiper from "../components/Screens/SwiperPost";
+import { StyleSheet, View, Button } from 'react-native';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-import SwiperPost from "../components/Screens/SwiperPost";
 import { SimplifiedStack } from './SimplifiedStack';
 import TabScreen from '../components/Screens/TabScreen';
 import { ClatStack } from './ClatStack';
 import { SnippetStack } from './SnippetStack';
+import { DecodedStack } from './DecodedStack';
+import AboutUsScreen from '../components/Screens/AboutUsScreen';
 function SettingsScreen({ navigation }) {
   // const { user } = route.params;
   return (
@@ -36,67 +30,38 @@ function SettingsScreen({ navigation }) {
 
 
 
-
-function DecodedRoot() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Decoded" component={Decoded}
-        options={{
-          headerShown: false,
-          title: 'NewsDecoded',
-          headerStyle: {
-            backgroundColor: '#111111',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            // fontWeight: 'bold',
-          },
-        }}
-      />
-      <Stack.Screen name="Profile"
-        screenOptions={{ headerShown: true }}
-        component={NewsDecodedArticle} options={{
-          title: 'NewsDecoded',
-          headerStyle: {
-            backgroundColor: '#111111',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            color: "#fff",
-          },
-        }} />
-
-
-    </Stack.Navigator>
-  );
-}
-
-
-
-
 function NewsApp() {
   return (
     <Drawer.Navigator
       initialRouteName="Home"
       screenOptions={{
-        headerShown: true, activeTintColor: '#ff9800',
-        itemStyle: { marginVertical: 5 },
+        // activeTintColor: '#e91e63',
+        // headerShown: true, activeTintColor: '#ff9800', backgroundColor: "#000",
+        // itemStyle: { marginVertical: 14 },
       }}
+      // drawerContentOptions={{
+      //   activeTintColor: '#e91e63',
+      //   itemStyle: { marginVertical: 5 },
+      // }}
       drawerContent={(props) =>
         < CustomSidebarMenu {...props} />
       }
     >
       <Drawer.Screen name="Home" component={SnippetStack}
         options={{
-          headerShown: true,
+          headerShown: false,
 
           title: 'Snippets',
           headerStyle: {
             backgroundColor: '#000',
           },
-          headerTintColor: '#fff',
+          headerTintColor: '#000',
+          activeTintColor: "#000",
+          backgroundColor: "#000",
+          // drawerActiveBackgroundColor: "#000",
+          drawerActiveTintColor: "#000",
           headerTitleStyle: {
-            color: "#fff",
+            color: "#000",
           },
         }}
       />
@@ -110,12 +75,14 @@ function NewsApp() {
             backgroundColor: '#111111',
           },
           headerTintColor: '#fff',
+          drawerActiveTintColor: "#000",
+
           headerTitleStyle: {
             color: "#fff",
           },
         }}
       />
-      <Drawer.Screen name="NewDecoded" component={DecodedRoot}
+      <Drawer.Screen name="NewDecoded" component={DecodedStack}
 
         options={{
           headerShown: false,
@@ -124,6 +91,8 @@ function NewsApp() {
           headerStyle: {
             backgroundColor: '#111111',
           },
+          drawerActiveTintColor: "#000",
+
           headerTintColor: '#fff',
           headerTitleStyle: {
             color: "#fff",
@@ -132,12 +101,30 @@ function NewsApp() {
       />
       <Drawer.Screen name="Clat" component={ClatStack}
         options={{
-          headerShown: true,
+          headerShown: false,
 
           title: 'CLAT Section',
           headerStyle: {
             backgroundColor: '#000',
           },
+          drawerActiveTintColor: "#000",
+
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            color: "#fff",
+          },
+        }}
+      />
+      <Drawer.Screen name="Contact" component={AboutUsScreen}
+        options={{
+          headerShown: true,
+
+          title: 'About Us',
+          headerStyle: {
+            backgroundColor: '#000',
+          },
+          drawerActiveTintColor: "#000",
+
           headerTintColor: '#fff',
           headerTitleStyle: {
             color: "#fff",

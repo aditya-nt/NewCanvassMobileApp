@@ -4,12 +4,10 @@ import { FlatList, Text, View, StyleSheet, Image } from 'react-native';
 import { Button, Card, Title, Paragraph } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchSimplifiedTask } from '../../../slices';
-import AppBar from "../../AppBar";
-import { simplified } from "../../../slices";
 import { useIsFocused } from '@react-navigation/native';
 
 import LottieView from 'lottie-react-native';
+import { decoded } from '../../../slices';
 
 
 var styles = {
@@ -39,20 +37,21 @@ var styles = {
     }
 }
 
-export default function SwiperPost() {
+export default function SwiperPostND() {
 
     const dispatch = useDispatch()
 
     const isFocused = useIsFocused()
 
-    const data = useSelector(state => state.simplified.tasksimplified)
-    const isLoading = useSelector(state => state.simplified.loading)
 
-    let actions = bindActionCreators(simplified.actions, dispatch)
+    const data = useSelector(state => state.decoded.taskdecoded)
+    const isLoading = useSelector(state => state.decoded.loading)
+
+    let actions = bindActionCreators(decoded.actions, dispatch)
 
 
     const handleClickPost = (index) => {
-        console.log("object")
+        // console.log("object")
         actions.setSelectedPost(index)
         // navigation.navigate('Profile')
     }

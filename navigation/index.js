@@ -2,6 +2,7 @@ import React from 'react';
 
 import { AuthenticatedUserProvider } from './AuthenticatedUserProvider';
 import RootNavigator from './RootNavigator';
+import SubscribeProvider from './SubscriberContext';
 
 /**
  * Wrap all providers here
@@ -10,7 +11,9 @@ import RootNavigator from './RootNavigator';
 export default function Routes() {
   return (
     <AuthenticatedUserProvider>
-      <RootNavigator />
+      <SubscribeProvider>
+        <RootNavigator />
+      </SubscribeProvider>
     </AuthenticatedUserProvider>
   );
 }
